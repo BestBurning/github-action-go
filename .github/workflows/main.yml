@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  flutter-ubuntu-test:
+  flutter-ubuntu-demo:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
           channel: 'dev'
       - run: flutter doctor -v
   
-  flutter-macos-test:
+  flutter-macos-demo:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -39,3 +39,9 @@ jobs:
       - name: Env Init
         run: |
           echo "${{ secrets.SIGNING_KEY }}" | base64 --decode > ./key.jks
+  hello-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello
+        run: |
+          echo "Hello World"
