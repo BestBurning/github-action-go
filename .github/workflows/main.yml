@@ -1,21 +1,38 @@
-name: beta-build
+name: Demo
 
 on:
   push:
     branches: [main]
 
 jobs:
-  flutter-test:
+  flutter-ubuntu-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+      - name: Cache Flutter Dependencies
+        uses: actions/cache@v1
         with:
-          java-version: '11'
+          path: /opt/hostedtoolcache/flutter
+          key: ${{ runner.os }}-flutter
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '1.24.0-10.2.pre'
           channel: 'dev'
+      - run: flutter doctor -v
+  
+  flutter-macos-test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache Flutter Dependencies
+        uses: actions/cache@v1
+        with:
+          path: /Users/runner/hostedtoolcache/flutter
+          key: ${{ runner.os }}-flutter
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'dev'
+      - run: flutter doctor -v
+        
   env-demo:
     runs-on: ubuntu-latest
     steps:
